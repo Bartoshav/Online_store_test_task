@@ -12,6 +12,3 @@ class Product(models.Model):
 class Order(models.Model):
     Date= models.DateField(auto_now_add=True)
     Product = models.ManyToManyField(Product)
-
-    def __str__(self):
-        return self.id
