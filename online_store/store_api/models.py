@@ -8,3 +8,10 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+class Order(models.Model):
+    Date= models.DateField(auto_now_add=True)
+    Product = models.ManyToManyField(Product)
+
+    def __str__(self):
+        return self.id
