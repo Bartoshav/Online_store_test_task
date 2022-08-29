@@ -18,6 +18,18 @@ from django.urls import path
 from django.urls import include
 from rest_framework import routers
 from store_api.views import ProductViewSet, OrderViewSet
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view as swagger_get_schema_view
+
+schema_view = swagger_get_schema_view(
+    openapi.Info(
+        title="Posts API",
+        default_version="1.0.0",
+        description="API documentation off App",
+    ),
+    public=True,
+
+)
 
 router =routers.DefaultRouter()
 router.register(r'product', ProductViewSet)
@@ -26,4 +38,5 @@ router.register(r'order', OrderViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(router.urls)),
+    path("swagger/schema/", schema_view.with_ui('swagger', cache_timeout=0), name="swagger-schema"),
 ]
