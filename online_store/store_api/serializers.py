@@ -13,3 +13,7 @@ class OrderSerializer(WritableNestedModelSerializer):
     class Meta:
         model = Order
         fields = ['id', 'Date', 'Product']
+
+class StatsSerializer(serializers.Serializer):
+    month_report = serializers.DateField()
+    value = serializers.IntegerField()
