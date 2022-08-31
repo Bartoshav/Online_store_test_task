@@ -13,11 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from pstats import Stats
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from rest_framework import routers
-from store_api.views import ProductViewSet, OrderViewSet
+from store_api import views
+from store_api.views import ProductViewSet, OrderViewSet, StatsAPIView
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view as swagger_get_schema_view
 
@@ -35,8 +37,11 @@ router =routers.DefaultRouter()
 router.register(r'product', ProductViewSet)
 router.register(r'order', OrderViewSet)
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(router.urls)),
-    path("swagger/schema/", schema_view.with_ui('swagger', cache_timeout=0), name="swagger-schema"),
+    path('api/v1/stats/', views.StatsAPIView.as_view(), name="stats"),
+    path('swagger/schema/', schema_view.with_ui('swagger', cache_timeout=0), name="swagger-schema")
+        
 ]
