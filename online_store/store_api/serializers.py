@@ -15,5 +15,5 @@ class OrderSerializer(WritableNestedModelSerializer):
         fields = ['id', 'Date', 'Product']
 
 class StatsSerializer(serializers.Serializer):
-    month_report = serializers.DateField()
+    month = serializers.DateField(format='%Y %b')
     value = serializers.IntegerField()
